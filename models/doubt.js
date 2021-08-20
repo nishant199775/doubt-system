@@ -1,0 +1,42 @@
+const mongoose=require('mongoose');
+const doubtSchema=mongoose.Schema({
+    title:{
+        type:String,
+    },
+    comments:[{
+        type:mongoose.Types.ObjectId,
+        ref:'comment'
+    }],
+    description:{
+        type:String,
+    },
+    active:{
+        type:Boolean,
+        default:true
+    },
+    escalated:{
+        type:Boolean,
+        default:false
+    },
+    resolved:{
+        type:Boolean,
+        default:false
+    },
+    answer:{
+        type:String,
+        default:""
+    },
+    createdBy:{
+        type:mongoose.Types.ObjectId,
+        ref:'user'
+    },
+    answeredBy:{
+        type:String,
+        default:""
+    }
+    
+},{
+    timestamps:true
+}
+)
+module.exports=mongoose.model('doubt',doubtSchema)
