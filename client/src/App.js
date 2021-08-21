@@ -25,7 +25,7 @@ import Navbar from './components/Navbar'
 // import Unauthorized from './components/Unauthaorized';
 // import userDashboard from './components/userDash';
 import {initialState,reducer} from '../src/reducers/RoleReducer'
-// import AboutUs from './components/aboutUs';
+ import Home from './components/Home';
 // import registrantsDetails from './components/registrantsDetails';
 // import AllRegistrants from './components/allRegistrants';
 export const RoleContext=createContext();
@@ -49,6 +49,7 @@ const [state,dispatch]=useReducer(reducer,initialState);
         <Route path="/admin/dashboard" exact component={adminDash}/>
         <Route path="/attendence" exact component={Attendence}/>
         <Route path="/createEvent" exact component={createEvent}/> */}
+        <Route path="/" exact component={Home}/>
         <Route path="/doubtPage" exact component={DoubtPage}/>
         <Route path="/signup" exact component={signup}/>
         <Route path="/signin" exact component={signin}/>
