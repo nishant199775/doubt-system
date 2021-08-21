@@ -46,14 +46,11 @@ const Doubt = (props) => {
         <>
     <Row>
     <Col sm="12" md={{ size: 9, offset: 1 }}>
-        <Card>
-
-            <CardHeader> <h1 className="display-3">SOLVE DOUBT</h1></CardHeader>
-        </Card> 
+        
         </Col>
     </Row>
     <Row style={{margin:'1rem'}}>
-        <Col sm="12" md={{ size: 8, offset: 1 }}>
+        <Col sm="12" md={{ size: 10, offset: 1 }}>
             <Card style={{padding:'1rem'}}>
                 <Row>
                     <Col sm="10">
