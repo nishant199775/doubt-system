@@ -53,7 +53,8 @@ const StudentHome = (props) => {
                             <Col sm="1" xs="3"><Card style={{padding:"0.8rem"}}><b><small>{doubts.length} Doubts</small></b></Card></Col>
                     </Row>
                         
-                            {
+                            {doubts.length===0?<Col sm="12" md={{ size: 10, offset: 1 }}><CardHeader> <h1 className="display-4">No Doubts Posted!</h1></CardHeader>
+                            </Col>:
                                 doubts.map(doubt=>{
                                     return <StudentDoubt doubt={doubt}></StudentDoubt>
                                 })

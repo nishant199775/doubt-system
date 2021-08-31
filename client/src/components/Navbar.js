@@ -1,9 +1,10 @@
 import Axios from 'axios';
-import React,{ useState,Badge, useContext} from 'react';
+import React,{ useState, useContext} from 'react';
 import {Redirect, useHistory,Link} from 'react-router-dom';
 import {
   Collapse,
   Navbar,
+  Badge,
   NavbarToggler,
   NavbarBrand,
   Nav,
@@ -12,7 +13,7 @@ import {
   Button
 } from 'reactstrap';
 import { RoleContext } from '../App';
-import jwt from 'jsonwebtoken';
+
 
 
 
@@ -23,14 +24,9 @@ const Navbar1= (props) => {
  
   const toggle = () => setIsOpen(!isOpen);
   const [isLoggedIn,setLogin]=useState(false);
-  // const [role,setRole]=useState(3);
+
   const token=localStorage.getItem('token');
-  // useEffect(()=>{
-  //   jwt.verify(token,'event',(err,decode)=>{
-  //     if(localStorage.getItem('gender'))
-  //     setGender(decode.gender)
-  //   })
-  // },[])
+ 
   
   const RenderMenu=()=>{
     // student nav
@@ -43,15 +39,16 @@ const Navbar1= (props) => {
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
-              <NavItem>
-                <NavLink href="/student/home">Home</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/student/createDoubt">Raise Doubt</NavLink>
-              </NavItem>
-              
-              
-            </Nav>
+                <NavItem>
+                  <Badge color="light" pill>STUDENT</Badge>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="/student/home">Home</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="/student/createDoubt">Raise Doubt</NavLink>
+                </NavItem>
+             </Nav>
             {/* <Badge color="rgba(153, 234, 77, 0.73)" style={{color:"rgba(153, 234, 77, 0.73)",border:"0.5px solid white",borderRadius:"12px"}}>Student</Badge> */}
             <NavLink><Button onClick={handleLogout}>Logout</Button></NavLink>
           </Collapse>
@@ -69,6 +66,10 @@ const Navbar1= (props) => {
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
+            <NavItem>
+                <Badge color="info" pill>TA</Badge>
+              </NavItem>
+
               <NavItem>
                 <NavLink href="/ta/report">Dashboard</NavLink>
               </NavItem>
@@ -77,6 +78,9 @@ const Navbar1= (props) => {
               </NavItem>
               <NavItem>
                 <NavLink href="/doubtPage">Solve Doubt</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="/ta/unresolved">Unresolved Doubts</NavLink>
               </NavItem>
               
             </Nav>
@@ -113,31 +117,14 @@ const Navbar1= (props) => {
       )
     }
   }
-  // useEffect(() => {
-  //   }, [isLoggedIn])
-  //   useEffect(async ()=>{
-  //       const token=localStorage.getItem('token');
-  //       if(token)
-  //       {
-  //         const res=await Axios.get('/users',{
-  //           headers:{
-  //             "Authorization":`Bearer ${token}`
-  //           }
-  //         })
-  //         console.log('in navbar role',res.data.role)
-  //         setRole(res.data.role);
-  //       }
-  //       else{
-  //         setRole(3);
-  //       }
-        
-  //   },[])
+  
 
     
 
   const handleLogout=()=>{
 
-    localStorage.clear();
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
     dispatch({type:"USER",payload:3});
     setLogin(true)
   }

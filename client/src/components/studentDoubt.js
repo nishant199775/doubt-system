@@ -106,8 +106,8 @@ const StudentDoubt = (props) => {
             :<CardText>Answer: No Answer Yet!</CardText>}
             
             <Row>
-            <Col sm="6"></Col>
-            <Col> <small className="text-muted">Posted By : {name} on {moment(createdAt).format("LLLL")}</small></Col>
+            <Col sm="8"></Col>
+            <Col> <small className="text-muted">Posted By : {name} <br></br>on {moment(createdAt).format("LLLL")}</small></Col>
             </Row>
             <hr></hr>
             <Card style={{padding:"1rem",backgroundColor:"#c48e7e"}}>

@@ -8,8 +8,8 @@ import Comment from './Comment';
 import moment from 'moment';
 
 const AcceptedDoubt = (props) => {
-    const {title,description,_id,createdBy,createdAt}=props.location.state.doubt;
-    const {name}=createdBy;
+    const {title,description,_id,createdBy,createdAt}=props.doubt;
+     const {name}=createdBy;
     const [answer,setAnswer]=useState('');
     const history=useHistory();
     const token=localStorage.getItem('token');
@@ -48,7 +48,7 @@ const AcceptedDoubt = (props) => {
                 }
             })
             if(res2.data.status===200){
-                const res=await axios.post('/api/v1/ta/resolve',{doubtId:_id,acceptedTime:localStorage.getItem('acceptedTime')},{
+                const res=await axios.post('/api/v1/ta/resolve',{doubtId:_id,acceptedTime:localStorage.getItem('acceptedTime'+_id)},{
                     headers:{
                       "Authorization":`Bearer ${token}`
                     }
@@ -56,8 +56,9 @@ const AcceptedDoubt = (props) => {
     
                 if(res.data.status===200)
                 {
-            
-                    history.push('/doubtPage');
+
+                    localStorage.removeItem('acceptedTime'+_id)
+                    history.push('/ta/report');
                 }
                 else{
                     alert(res.data.message);
@@ -77,7 +78,7 @@ const AcceptedDoubt = (props) => {
      // ESCALATE HANDLER
     const onEscalate=async (e)=>{
         try{
-            const res=await axios.post('/api/v1/ta/escalate',{doubtId:_id,acceptedTime:localStorage.getItem('acceptedTime')},{
+            const res=await axios.post('/api/v1/ta/escalate',{doubtId:_id,acceptedTime:localStorage.getItem('acceptedTime'+_id)},{
                 headers:{
                   "Authorization":`Bearer ${token}`
                 }
@@ -85,7 +86,7 @@ const AcceptedDoubt = (props) => {
             alert(res.data.message);
             if(res.data.status===200)
             {
-                
+                localStorage.removeItem('acceptedTime'+_id)
                 history.push('/doubtPage');
             }
         }
@@ -104,15 +105,8 @@ const AcceptedDoubt = (props) => {
         }
         else{
     return ( 
-    <div>
-        <Row style={{margin:"1rem"}}>
-            <Col sm="12" >
-            <Card style={{backgroundColor:"#7d3631",color:"white"}}>
-
-                <CardHeader> <h1 className="display-3">SOLVE DOUBT</h1></CardHeader>
-            </Card> 
-            </Col>
-        </Row>
+    <Card style={{margin:"2rem",padding:"1rem"}}>
+        
         <Row>
             <Col sm="6" md={{ size: 6, offset: 1 }}>
             <Card style={{padding:'2rem',backgroundColor:"#e8e4e3"}} >
@@ -180,7 +174,7 @@ const AcceptedDoubt = (props) => {
         </Row>
       
      
-    </div> );
+    </Card> );
         }
 }
  

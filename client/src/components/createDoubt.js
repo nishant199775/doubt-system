@@ -42,7 +42,7 @@ const CreateDoubt = (props) => {
               <FormGroup row style={{margin:"1rem"}}>
                 <Label for="exampleEmail" sm={2}>Description</Label>
                 <Col sm={10}>
-                  <Input type="email" name="email" onChange={(e)=>setDescription(e.target.value)} placeholder="Describe your doubt " />
+                  <Input type="text" name="description" onChange={(e)=>setDescription(e.target.value)} placeholder="Describe your doubt " />
                 </Col>
               </FormGroup>
              

@@ -22,9 +22,9 @@ const Doubt = (props) => {
              console.log('res',res);
              if(res.data.status===200)
              {
-                 localStorage.setItem('acceptedTime',res.data.acceptedTime);
+                 localStorage.setItem('acceptedTime'+_id,res.data.acceptedTime);
                 history.push({
-                    pathname:'/acceptedDoubt',
+                    pathname:'/ta/unresolved',
                     state:{doubt:props.doubt}
                   });
              }

@@ -93,6 +93,25 @@ module.exports.taDetails=async (req,res)=>{
     }
 }
 
+module.exports.acceptedUnresolvedDoubt=async (req,res)=>{
+  try{
+    const {_id}=req.user;
+    const acceptedDoubts=await ta.findById(_id).populate({path:'accepted',populate:{path:'createdBy',model:'user'}}).select('accepted');
+    const acceptedArr=acceptedDoubts.accepted;
+    const unresolved=acceptedArr.filter((value)=>{
+      return !value.resolved&&!value.active;
+    })
+    res.json('200',{status:200,message:"Accepted unresolved doubts generated successfully!",doubts:unresolved});
+
+  }
+  catch(err){
+    console.log(err);
+    res.json('200',{status:500,message:"Error in generating accepted Unresolved Doubts",error:err});
+  }
+
+}
+
+
 module.exports.getAllTA=async (req,res)=>{
     try{
         const allTa=await ta.find({}).sort({resolved:-1})

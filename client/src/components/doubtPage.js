@@ -6,7 +6,9 @@ import { Redirect } from "react-router";
 
 const DoubtPage = (props) => {
     const token=localStorage.getItem('token');
-    const [doubts,setDoubts]=useState([])
+    const [doubts,setDoubts]=useState([]);
+    const [loaded,setLoaded]=useState(false)
+
     useEffect(async ()=>{
         try{
           const res=await axios.get("/api/v1/doubt/getDoubts",{
@@ -33,6 +35,7 @@ const DoubtPage = (props) => {
             return (<Redirect to="/signin"/>)
         }
         else{
+            
             return (  
        
                 <div style={{margin:'2rem'}}>

@@ -8,4 +8,5 @@ router.post('/resolve',passport.authenticate('jwt',{session:false}),taController
 router.post('/escalate',passport.authenticate('jwt',{session:false}),taController.escalateDoubt);
 router.get('/getTaDetails',passport.authenticate('jwt',{session:false}),taController.taDetails);
 router.get('/getAllTa',passport.authenticate('jwt',{session:false}),taController.getAllTA);
+router.get('/getUnresolvedDoubt',passport.authenticate('jwt',{session:false}),taController.acceptedUnresolvedDoubt);
 module.exports=router;
